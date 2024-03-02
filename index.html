@@ -7,7 +7,7 @@ THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
  
 Authors in chronological order of contribution:
 Tim Riedel
-Author 2
+Koustubh Galagali
  
 Further Information:
 http://diystream.cns.utexas.edu/
@@ -17,10 +17,10 @@ Timothy Riedel
 triedel@utexas.edu
  
 Brief Description of Goal of Code:
-blah, blah, blah,
+To create a diagnosis app that helps to differentiate between two diseases that are often confused for each other
  
 Known Issues:
-blah, blah, blah, blah
+No known issues
 Ignore this error message if you see it using the javaScript console: Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.
 
 References:
@@ -30,16 +30,38 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 	
 <head> 
 	<title>Hello World</title>  
-]	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" href="w3.css">
 	<link rel="stylesheet" href="w3-colors-flat.css">
 </head> 
 
 <script>
+	var flu_count = 0;
+        var pneumonia_count = 0;
+	
+//Establishes initial value for flu variable and pneumonia variable count at zero//
+	
+	function fluAdd(){
+		flu_count = flu_count + 1;
+		alert("flu count : " + flu_count);
+        }
 
-	//YOUR JAVASCRIPT GOES HERE
+//When the button that has the fluAdd function is clicked the total score for flu adds up by one//
 
+	function pneumoniaAdd(){
+            	pneumonia_count = pneumonia_count + 1;
+		alert("pneumonia count : " + pneumonia_count);
+        }
+//When the button that has the pneumoniaAdd function is clicked the total score for pneumonia adds up by one//	
+
+	function diagnosisResults(){
+		var fluPercent = (flu_count/4) * 100;
+		var pneumoniaPercent = (pneumonia_count/4) * 100;
+		var resultText = document.getElementById("results");
+		resultText.innerHTML = "Probability it is the flu = " + fluPercent + "%" + "<br> Probability it is pneumonia = " + pneumoniaPercent + "%";
+	}
+//The given function calculates the probability of the flu and the probability of pneumonia by dividing the flu and pneumonia counts by four and then multiplying by 100//
 </script>	
 
 
@@ -64,12 +86,98 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
     left: 0vw;
     z-index: 1;
 }
+
+  .img, object {
+    max-height:90%;
+    max-width:90%;
+}
 </style>
 
 <body>
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Flu or Pneumonia?</h1>
+</div>
+	<!--Code establishes header of the main body as Flu or Pneumonia-->
+<div id="content" class="w3-container">
+	<p>Are you feeling like you might have the flu but wonder if it is pneumonia. Answer a few short questions to find out!</p>
 	
-	<!-- HERE IS WHERE ALL OF YOUR HTML PAGES GO -->
-	REPLACE THIS TEXT
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
 	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+	
+	<img src="https://as2.ftcdn.net/v2/jpg/02/60/58/21/1000_F_260582178_nS1oLjh46wfqxDkREhGUCHjy034JqJXU.jpg" alt="Sick person image">
+		
+<!--Code right before this establishes the purpose and intent of this program with respect to the user/audience. Code also uploads an image on the front page-->
+<!--Following code is the beginning of the questions. It starts off with page one and flips to the next pages as the buttons are pressed-->
+	
+<div class="page" id="one">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1>
+	</div>
+	<!--Header for page 1 states Question 1-->
+    	<div id="content" class="w3-container">
+        <p>Do you have a dry cough or are you wheezing?</p>  
+		<a href="#two" onclick="fluAdd();" class="w3-btn w3-grey w3-round">Dry Cough </a>
+		<a href="#two" onclick="pneumoniaAdd();" class="w3-btn w3-grey w3-round">Wheezing </a>
+    	</div>
+</div>
+<!--Code above establishes two buttons with each coding for either +1 value to the flu variable or the pneumonia variable-->
+<!--Code also directs the user to page 2-->
+<div class="page" id="two">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+<!--Code creates page two of the program and asks the second question-->
+	<div id="content" class="w3-container">
+		<p>Is your fever around 100.4 degrees or around 105 degrees?</p>
+		<a href="#three" onclick="fluAdd();" class="w3-btn w3-grey w3-round">100.4 </a>
+		<a href="#three" onclick="pneumoniaAdd();" class="w3-btn w3-grey w3-round">105 </a>
+	</div>
+</div>	
+<!--Code establishes buttons that adds +1 to the running total to either the flu variable or the pneumonia variable. Also redirects to page three of the program-->
+
+<div class="page" id="three">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+<!--Code creates page three and asks the third question-->
+	<div id="content" class="w3-container">
+		<p>Do you have yellowish, greenish, or bloody mucus?</p>
+		<a href="#four" onclick="pneumoniaAdd();" class="w3-btn w3-grey w3-round">Yes </a>
+		<a href="#four" onclick="fluAdd();" class="w3-btn w3-grey w3-round">No </a>
+	</div>
+</div>
+<!--Code establishes buttons for page three and adds +1 to the running total to either the flu variable or the pneumonia variable. Redirects to page four-->
+	
+<div class="page" id="four">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+<!--Code establishes page four and question four-->
+	<div id="content" class="w3-container">
+		<p>Do you have bluish fingernails and lips?</p>
+		<a href="#five" onclick="pneumoniaAdd();" class="w3-btn w3-grey w3-round">Yes </a>
+		<a href="#five" onclick="fluAdd();" class="w3-btn w3-grey w3-round">No </a>
+	</div>
+</div>
+<!--Code establishes buttons for page four and adds +1 to the running total to either the flu variable or the pneumonia variable. Redirects to page five-->
+
+<div class="page" id="five">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Results</h1>
+	</div>
+<!--Establishes page five as the results page-->	
+	<div id="content" class="w3-container">
+		<a onclick="diagnosisResults();" class="w3-btn w3-grey w3-round"> Click for Results </a>
+		<p id="results" ></p>
+	</div>
+</div>
+<!--Code allows diagnosisResults function to operate and calculate the probability for having the flu or pneumonia and then presenting that probability on this page after clicking the Click for Results button-->	
+	
+<footer class="w3-bottom w3-container w3-flat-carrot">
+	<p>DIY!</p>
+</footer>	
 </body>
 </html>
